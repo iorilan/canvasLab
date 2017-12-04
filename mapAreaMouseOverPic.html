@@ -1,0 +1,97 @@
+<html>
+<head>
+
+</head>
+<body >
+
+<canvas id="demo" width="684" height="631">Canvas not supported.</canvas>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+var canvas = document.getElementById('demo'),
+    ctx = canvas.getContext('2d');
+canvas.onmousedown = function (e){
+	 var r = canvas.getBoundingClientRect(),
+        x = e.clientX - r.left,
+        y = e.clientY - r.top;
+		
+		if(x >= 495 && x<= 495+100 && y >= 280 && y <= 280+40){
+			alert ('ECN 100001');
+		}
+		else if(x >= 289 && x<= 289+100 && y >= 290 && y <= 290+40){
+			alert ('ECN 100002');
+		}
+		else if(x >= 134 && x<= 134+100 && y >= 300 && y <= 300+40){
+			alert ('ECN 100003');
+		}
+		else if(x >= 446 && x<= 446+100 && y >= 16 && y <= 16+40){
+			alert ('ECN 100004');
+		}
+}
+
+function DrawEquip(x,y,txt){
+	  var imgEquip = new Image;
+	  var equipW = 51;
+	  var equipH = 38;
+	  imgEquip.onload = function(){
+		  ctx.drawImage(imgEquip, x, y, equipW, equipH);
+		  ctx.font="10px Arial";
+		  
+		  
+		  
+      ctx.strokeStyle = '#337ab7';
+		  ctx.strokeText(txt,x+52,y+30);
+	  };
+	  imgEquip.src = "equip.png";
+}
+
+function drawMap(){
+	var img = new Image;
+	img.onload = function(){
+		ctx.drawImage(img, 0, 0, demo.width, demo.height);
+		
+		
+		DrawEquip(495,280,'ECN: 100001');
+		DrawEquip(289,290,'ECN: 100002');
+		DrawEquip(134,300,'ECN: 100003');
+		DrawEquip(446,16,'ECN: 100004');
+	};
+	img.src = 'lvl2.jpg';
+}
+
+
+(function () {
+	drawMap();
+	//ctx.addEventListener('click',  function(){alert("");});
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

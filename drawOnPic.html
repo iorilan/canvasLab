@@ -1,0 +1,67 @@
+<canvas id="demo" width=400 height=400></canvas>
+<input type="button" id="btnDone" value="Get Image Data" />
+
+<script>
+					
+
+var canvas = document.getElementById('demo'),
+    ctx = canvas.getContext('2d'),
+    img = new Image;
+	btnDone = document.getElementById('btnDone');
+
+ctx.strokeStyle = '#003300';
+
+
+function DrawDot(x,y){
+      var centerX = x;
+      var centerY = y;
+      var radius = 1;
+
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+      ctx.fillStyle = 'green';
+      ctx.fill();
+      ctx.lineWidth = 0.5;
+      ctx.strokeStyle = '#003300';
+      ctx.stroke();
+}
+
+img.onload = start;
+img.src = '1.jpg';
+
+function start() {
+    ctx.drawImage(img, 0, 0, demo.width, demo.height);
+    canvas.onmousemove = updateLine;
+    canvas.onmousedown = mousedownhandle;
+    canvas.onmouseup = mouseuphandle;
+	
+	btnDone.onclick = done;
+}
+
+function updateLine(e) {
+	if(drawing){
+		mousedownhandle(e);
+    }
+}
+
+var drawing = false;
+function mousedownhandle(e){
+		drawing = true;
+		 var r = canvas.getBoundingClientRect(),
+        x = e.clientX - r.left,
+        y = e.clientY - r.top;
+    
+		DrawDot(x,y);
+}
+
+function mouseuphandle(e){
+	drawing = false;
+}
+
+function done(e){
+	var image = document.getElementById('demo').toDataURL("image/jpeg");
+	image = image.replace('data:image/jpeg;base64,', '');
+	alert(image);
+}
+
+</script>
